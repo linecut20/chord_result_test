@@ -1,0 +1,384 @@
+{
+  "chords": [
+    {
+      "start_time": 0.0,
+      "end_time": 5.201269841269841,
+      "chord": "N"
+    },
+    {
+      "start_time": 5.201269841269841,
+      "end_time": 9.287981859410431,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 9.287981859410431,
+      "end_time": 11.72607709750567,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 11.72607709750567,
+      "end_time": 13.630113378684808,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 13.630113378684808,
+      "end_time": 16.439727891156462,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 16.439727891156462,
+      "end_time": 17.87936507936508,
+      "chord": "N"
+    },
+    {
+      "start_time": 17.87936507936508,
+      "end_time": 22.244716553287983,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 22.244716553287983,
+      "end_time": 26.610068027210886,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 26.610068027210886,
+      "end_time": 28.83918367346939,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 28.83918367346939,
+      "end_time": 31.13795918367347,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 31.13795918367347,
+      "end_time": 35.22467120181406,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 35.22467120181406,
+      "end_time": 39.54358276643991,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 39.54358276643991,
+      "end_time": 43.885714285714286,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 43.885714285714286,
+      "end_time": 45.952290249433105,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 45.952290249433105,
+      "end_time": 48.32072562358277,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 48.32072562358277,
+      "end_time": 52.523537414965986,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 52.523537414965986,
+      "end_time": 56.86566893424036,
+      "chord": "Bb:major"
+    },
+    {
+      "start_time": 56.86566893424036,
+      "end_time": 61.13814058956916,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 61.13814058956916,
+      "end_time": 65.52671201814059,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 65.52671201814059,
+      "end_time": 67.63972789115647,
+      "chord": "C:major"
+    },
+    {
+      "start_time": 67.63972789115647,
+      "end_time": 69.84562358276644,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 69.84562358276644,
+      "end_time": 72.07473922902494,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 72.07473922902494,
+      "end_time": 74.16453514739229,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 74.16453514739229,
+      "end_time": 78.43700680272109,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 78.43700680272109,
+      "end_time": 82.82557823129252,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 82.82557823129252,
+      "end_time": 87.12126984126985,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 87.12126984126985,
+      "end_time": 89.42004535147393,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 89.42004535147393,
+      "end_time": 91.4401814058957,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 91.4401814058957,
+      "end_time": 95.78231292517007,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 95.78231292517007,
+      "end_time": 100.12444444444445,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 100.12444444444445,
+      "end_time": 104.42013605442177,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 104.42013605442177,
+      "end_time": 106.6724716553288,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 106.6724716553288,
+      "end_time": 108.73904761904762,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 108.73904761904762,
+      "end_time": 113.03473922902495,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 113.03473922902495,
+      "end_time": 117.46975056689342,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 117.46975056689342,
+      "end_time": 121.69578231292518,
+      "chord": "C:min7"
+    },
+    {
+      "start_time": 121.69578231292518,
+      "end_time": 123.8552380952381,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 123.8552380952381,
+      "end_time": 126.03791383219955,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 126.03791383219955,
+      "end_time": 130.3568253968254,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 130.3568253968254,
+      "end_time": 134.76861678004536,
+      "chord": "Bb:min"
+    },
+    {
+      "start_time": 134.76861678004536,
+      "end_time": 138.97142857142856,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 138.97142857142856,
+      "end_time": 143.42965986394557,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 143.42965986394557,
+      "end_time": 145.4962358276644,
+      "chord": "C:major"
+    },
+    {
+      "start_time": 145.4962358276644,
+      "end_time": 147.6324716553288,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 147.6324716553288,
+      "end_time": 149.88480725623583,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 149.88480725623583,
+      "end_time": 151.9978231292517,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 151.9978231292517,
+      "end_time": 155.364716553288,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 155.364716553288,
+      "end_time": 156.29351473922904,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 156.29351473922904,
+      "end_time": 160.6356462585034,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 160.6356462585034,
+      "end_time": 164.9777777777778,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 164.9777777777778,
+      "end_time": 167.32299319727892,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 167.32299319727892,
+      "end_time": 169.2734693877551,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 169.2734693877551,
+      "end_time": 173.6156009070295,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 173.6156009070295,
+      "end_time": 177.95773242630386,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 177.95773242630386,
+      "end_time": 182.2534240362812,
+      "chord": "C:major"
+    },
+    {
+      "start_time": 182.2534240362812,
+      "end_time": 184.57541950113378,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 184.57541950113378,
+      "end_time": 186.61877551020407,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 186.61877551020407,
+      "end_time": 188.8478911564626,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 188.8478911564626,
+      "end_time": 190.86802721088435,
+      "chord": "C#:min"
+    },
+    {
+      "start_time": 190.86802721088435,
+      "end_time": 195.442358276644,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 195.442358276644,
+      "end_time": 198.18231292517007,
+      "chord": "C:major"
+    },
+    {
+      "start_time": 198.18231292517007,
+      "end_time": 199.5290702947846,
+      "chord": "Ab:major/3"
+    },
+    {
+      "start_time": 199.5290702947846,
+      "end_time": 201.96716553287982,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 201.96716553287982,
+      "end_time": 203.89442176870747,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 203.89442176870747,
+      "end_time": 208.23655328798188,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 208.23655328798188,
+      "end_time": 212.50902494331066,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 212.50902494331066,
+      "end_time": 216.85115646258504,
+      "chord": "C:major"
+    },
+    {
+      "start_time": 216.85115646258504,
+      "end_time": 219.14993197278912,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 219.14993197278912,
+      "end_time": 222.67936507936508,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 222.67936507936508,
+      "end_time": 225.41931972789115,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 225.41931972789115,
+      "end_time": 229.8311111111111,
+      "chord": "Ab:major"
+    },
+    {
+      "start_time": 229.8311111111111,
+      "end_time": 234.1732426303855,
+      "chord": "C:min"
+    },
+    {
+      "start_time": 234.1732426303855,
+      "end_time": 236.402358276644,
+      "chord": "F:min"
+    },
+    {
+      "start_time": 236.402358276644,
+      "end_time": 238.4689342403628,
+      "chord": "Eb:major"
+    },
+    {
+      "start_time": 238.4689342403628,
+      "end_time": 243.48444444444445,
+      "chord": "C#:major"
+    },
+    {
+      "start_time": 243.48444444444445,
+      "end_time": 245.0401814058957,
+      "chord": "N"
+    }
+  ]
+}
