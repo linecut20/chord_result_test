@@ -15,7 +15,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  late final List chords;
+  final List chords = [];
   late final AudioPlayer player;
   late final PageController pageController;
   late final Timer timer;
@@ -34,12 +34,14 @@ class _DetailPageState extends State<DetailPage> {
     String path = widget.data['chord'];
     String file = await DefaultAssetBundle.of(context).loadString(path);
     Map json = jsonDecode(file);
-    chords = json['chords'];
+    json['chords'].forEach((element) {
+      if (element['chord'] != 'N') {
+        element['chord'] = element['chord'].replaceAll('min', 'm');
+        element['chord'] = element['chord'].replaceAll('/', '');
 
-    for (var chord in chords) {
-      chord['chord'] = chord['chord'].replaceAll('min', 'm');
-      chord['chord'] = chord['chord'].replaceAll('/', '');
-    }
+        chords.add(element);
+      }
+    });
 
     player = AudioPlayer()
       ..setAudioSource(AudioSource.asset(widget.data['music']));
@@ -153,7 +155,11 @@ class _DetailPageState extends State<DetailPage> {
                     itemBuilder: (context, index) {
                       String chordName = chords[index]['chord'];
 
-                      final String key = chordName.split(':').first;
+                      String key = chordName.split(':').first;
+                      if (key.contains('b')) {
+                        key = flatToSharp[chordName.split(':').first] ?? '';
+                      }
+
                       final String suffix = chordName.split(':').last;
                       final ChordPosition? parsedChord =
                           instrument.getChordPositions(key, suffix)?.first;
@@ -164,12 +170,11 @@ class _DetailPageState extends State<DetailPage> {
                         child: parsedChord == null
                             ? Container(
                                 alignment: Alignment.center,
-                                child: Text(
-                                    '"${chordName.replaceAll(':', '')}" chord not found'),
+                                child: Text('"$key$suffix" chord not found'),
                               )
                             : FlutterGuitarChord(
                                 baseFret: parsedChord.baseFret,
-                                chordName: chordName.replaceAll(':', ''),
+                                chordName: '$key$suffix',
                                 fingers: parsedChord.fingers,
                                 frets: parsedChord.frets,
                                 fingerSize: 16,
