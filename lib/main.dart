@@ -1,5 +1,5 @@
-import 'package:chord_result_test/data.dart';
 import 'package:chord_result_test/detail_page.dart';
+import 'package:chord_result_test/new_data.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +20,7 @@ class _MainAppState extends State<MainApp> {
       home: Scaffold(
         body: ListView.builder(
           itemBuilder: (context, index) {
-            final Map parsed = parseData[index];
+            final Map parsed = newParseData[index];
 
             return ListTile(
               title: Text(parsed['title']),
@@ -34,7 +34,7 @@ class _MainAppState extends State<MainApp> {
               },
             );
           },
-          itemCount: parseData.length,
+          itemCount: newParseData.length,
         ),
       ),
     );

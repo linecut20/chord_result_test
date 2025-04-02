@@ -15,12 +15,17 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  final List chords = [];
+  late final List chords;
   late final AudioPlayer player;
   late final PageController pageController;
   late final Timer timer;
   var instrument = GuitarChordLibrary.instrument();
   int curIndex = 1;
+
+  late final List crChords;
+  late final PageController crPageController;
+  late final Timer crTimer;
+  int crCurIndex = 1;
 
   bool isLoading = true;
 
@@ -31,16 +36,31 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   init() async {
+    //구버전 모델 데이터 init ================================================
     String path = widget.data['chord'];
     String file = await DefaultAssetBundle.of(context).loadString(path);
     Map json = jsonDecode(file);
-    json['chords'].forEach((element) {
-      if (element['chord'] != 'N') {
-        element['chord'] = element['chord'].replaceAll('min', 'm');
-        element['chord'] = element['chord'].replaceAll('/', '');
+    Map chord = jsonDecode(json['btc_chord_data']['normal']);
+    chords = [];
+    Map startTimes = chord['Start_Time'];
+    Map endTimes = chord['End_Time'];
+    Map chordData = chord['Chord'];
 
-        chords.add(element);
-      }
+    for (int i = 0; i < startTimes.length - 1; i++) {
+      chords.add({
+        'start_time': startTimes[i.toString()],
+        'end_time': endTimes[i.toString()],
+        'chord':
+            chordData[i.toString()].replaceAll('maj', '').replaceAll('min', 'm')
+      });
+    }
+
+    // Add last chord
+    int lastIndex = startTimes.length - 1;
+    chords.add({
+      'start_time': startTimes[lastIndex.toString()],
+      'end_time': endTimes[lastIndex.toString()],
+      'chord': chordData[lastIndex.toString()].replaceAll('min', 'm')
     });
 
     player = AudioPlayer()
@@ -66,6 +86,55 @@ class _DetailPageState extends State<DetailPage> {
       },
     );
 
+    //새버전 모델 데이터 init ================================================
+    String crPath = widget.data['chord'];
+    String crFile = await DefaultAssetBundle.of(context).loadString(crPath);
+    Map crJson = jsonDecode(crFile);
+    Map crChord = jsonDecode(crJson['cr_chord_data']['normal']);
+    crChords = [];
+    Map crStartTimes = crChord['Start_Time'];
+    Map crEndTimes = crChord['End_Time'];
+    Map crChordData = crChord['Chord'];
+
+    for (int i = 0; i < crStartTimes.length - 1; i++) {
+      crChords.add({
+        'start_time': crStartTimes[i.toString()],
+        'end_time': crEndTimes[i.toString()],
+        'chord': crChordData[i.toString()]
+            .replaceAll('maj', '')
+            .replaceAll('min', 'm')
+      });
+    }
+
+    // Add last chord
+    int clastIndex = crStartTimes.length - 1;
+    crChords.add({
+      'start_time': crStartTimes[clastIndex.toString()],
+      'end_time': crEndTimes[clastIndex.toString()],
+      'chord': crChordData[clastIndex.toString()].replaceAll('min', 'm')
+    });
+
+    crPageController = PageController(viewportFraction: 0.32);
+    crTimer = Timer.periodic(
+      const Duration(milliseconds: 250),
+      (timer) {
+        if (player.position.inMilliseconds == 0) return;
+        final double curTime = player.position.inSeconds.toDouble() + 0.4;
+
+        final int index = crChords.indexWhere((element) =>
+            element['start_time'] <= curTime && element['end_time'] >= curTime);
+        if (index == -1) return;
+
+        if (crPageController.hasClients) {
+          crPageController.animateToPage(index,
+              duration: const Duration(milliseconds: 150),
+              curve: Curves.easeInOut);
+        }
+
+        setState(() {});
+      },
+    );
+
     isLoading = false;
     setState(() {});
     player.play();
@@ -76,6 +145,9 @@ class _DetailPageState extends State<DetailPage> {
     player.dispose();
     pageController.dispose();
     timer.cancel();
+
+    crPageController.dispose();
+    crTimer.cancel();
     super.dispose();
   }
 
@@ -139,11 +211,16 @@ class _DetailPageState extends State<DetailPage> {
                           player.play();
                         },
                         min: 0.0,
-                        max: player.duration?.inMilliseconds.toDouble() ?? 0.0,
+                        max: player.duration?.inMilliseconds.toDouble() ?? 1,
                       );
                     },
                   ),
                 ),
+                const Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text('구버전'))),
                 Expanded(
                   child: PageView.builder(
                     controller: pageController,
@@ -155,26 +232,25 @@ class _DetailPageState extends State<DetailPage> {
                     itemBuilder: (context, index) {
                       String chordName = chords[index]['chord'];
 
-                      String key = chordName.split(':').first;
-                      if (key.contains('b')) {
-                        key = flatToSharp[chordName.split(':').first] ?? '';
-                      }
-
-                      final String suffix = chordName.split(':').last;
+                      final String key = chordName.split(':').first;
+                      final String suffix = chordName.contains(':')
+                          ? chordName.split(':').last
+                          : '';
                       final ChordPosition? parsedChord =
                           instrument.getChordPositions(key, suffix)?.first;
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 80, vertical: 70),
+                            horizontal: 80, vertical: 45),
                         child: parsedChord == null
                             ? Container(
                                 alignment: Alignment.center,
-                                child: Text('"$key$suffix" chord not found'),
+                                child: Text(
+                                    'key : $key, suffix : $suffix chord not found'),
                               )
                             : FlutterGuitarChord(
                                 baseFret: parsedChord.baseFret,
-                                chordName: '$key$suffix',
+                                chordName: chordName.replaceAll(':', ''),
                                 fingers: parsedChord.fingers,
                                 frets: parsedChord.frets,
                                 fingerSize: 16,
@@ -188,6 +264,62 @@ class _DetailPageState extends State<DetailPage> {
                                     ? Colors.black
                                     : Colors.grey,
                                 tabBackgroundColor: index == curIndex
+                                    ? Colors.black
+                                    : Colors.grey,
+                                tabForegroundColor: Colors.transparent,
+                              ),
+                      );
+                    },
+                  ),
+                ),
+                const Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text('신버전'))),
+                Expanded(
+                  child: PageView.builder(
+                    controller: crPageController,
+                    padEnds: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: crChords.length,
+                    onPageChanged: (value) =>
+                        setState(() => crCurIndex = value),
+                    itemBuilder: (context, index) {
+                      String chordName = crChords[index]['chord'];
+
+                      final String key = chordName.split(':').first;
+                      final String suffix = chordName.contains(':')
+                          ? chordName.split(':').last
+                          : '';
+                      final ChordPosition? parsedChord =
+                          instrument.getChordPositions(key, suffix)?.first;
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 80, vertical: 45),
+                        child: parsedChord == null
+                            ? Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                    'key : $key, suffix : $suffix chord not found'),
+                              )
+                            : FlutterGuitarChord(
+                                baseFret: parsedChord.baseFret,
+                                chordName: chordName.replaceAll(':', ''),
+                                fingers: parsedChord.fingers,
+                                frets: parsedChord.frets,
+                                fingerSize: 16,
+                                labelColor: index == crCurIndex
+                                    ? Colors.black
+                                    : Colors.grey,
+                                barColor: index == crCurIndex
+                                    ? Colors.black
+                                    : Colors.grey,
+                                stringColor: index == crCurIndex
+                                    ? Colors.black
+                                    : Colors.grey,
+                                tabBackgroundColor: index == crCurIndex
                                     ? Colors.black
                                     : Colors.grey,
                                 tabForegroundColor: Colors.transparent,

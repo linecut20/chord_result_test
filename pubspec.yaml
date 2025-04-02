@@ -1,6 +1,6 @@
 name: chord_result_test
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -33,3 +33,9 @@ flutter:
     - assets/Green Day-Basket Case/
     - assets/Jamiroquai-Virtual Insanity/
     - assets/Woodz-Drowning/
+    - assets/new_data/
+    - assets/new_data/data1/
+    - assets/new_data/data2/
+    - assets/new_data/data3/
+    - assets/new_data/data4/
+    - assets/new_data/data5/
