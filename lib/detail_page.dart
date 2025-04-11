@@ -29,6 +29,8 @@ class _DetailPageState extends State<DetailPage> {
 
   bool isLoading = true;
 
+  double adjPoint = 0;
+
   @override
   void initState() {
     init();
@@ -70,7 +72,7 @@ class _DetailPageState extends State<DetailPage> {
       const Duration(milliseconds: 250),
       (timer) {
         if (player.position.inMilliseconds == 0) return;
-        final double curTime = player.position.inSeconds.toDouble() + 0.4;
+        final double curTime = player.position.inSeconds.toDouble() + adjPoint;
 
         final int index = chords.indexWhere((element) =>
             element['start_time'] <= curTime && element['end_time'] >= curTime);
@@ -119,7 +121,7 @@ class _DetailPageState extends State<DetailPage> {
       const Duration(milliseconds: 250),
       (timer) {
         if (player.position.inMilliseconds == 0) return;
-        final double curTime = player.position.inSeconds.toDouble() + 0.4;
+        final double curTime = player.position.inSeconds.toDouble() + adjPoint;
 
         final int index = crChords.indexWhere((element) =>
             element['start_time'] <= curTime && element['end_time'] >= curTime);
@@ -216,6 +218,11 @@ class _DetailPageState extends State<DetailPage> {
                     },
                   ),
                 ),
+                // positino mm:ss
+                Text(
+                  '${player.position.inMinutes}:${(player.position.inSeconds % 60).toString().padLeft(2, '0')} / ${player.duration?.inMinutes}:${(player.duration?.inSeconds ?? 1 % 60).toString().padLeft(2, '0')}',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 const Align(
                     alignment: Alignment.center,
                     child: Padding(
@@ -248,25 +255,34 @@ class _DetailPageState extends State<DetailPage> {
                                 child: Text(
                                     'key : $key, suffix : $suffix chord not found'),
                               )
-                            : FlutterGuitarChord(
-                                baseFret: parsedChord.baseFret,
-                                chordName: chordName.replaceAll(':', ''),
-                                fingers: parsedChord.fingers,
-                                frets: parsedChord.frets,
-                                fingerSize: 16,
-                                labelColor: index == curIndex
-                                    ? Colors.black
-                                    : Colors.grey,
-                                barColor: index == curIndex
-                                    ? Colors.black
-                                    : Colors.grey,
-                                stringColor: index == curIndex
-                                    ? Colors.black
-                                    : Colors.grey,
-                                tabBackgroundColor: index == curIndex
-                                    ? Colors.black
-                                    : Colors.grey,
-                                tabForegroundColor: Colors.transparent,
+                            : Column(
+                                children: [
+                                  Expanded(
+                                    child: FlutterGuitarChord(
+                                      baseFret: parsedChord.baseFret,
+                                      chordName: chordName.replaceAll(':', ''),
+                                      fingers: parsedChord.fingers,
+                                      frets: parsedChord.frets,
+                                      fingerSize: 16,
+                                      labelColor: index == curIndex
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      barColor: index == curIndex
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      stringColor: index == curIndex
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      tabBackgroundColor: index == curIndex
+                                          ? Colors.black
+                                          : Colors.grey,
+                                      tabForegroundColor: Colors.transparent,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${chords[index]['start_time']}',
+                                  )
+                                ],
                               ),
                       );
                     },
